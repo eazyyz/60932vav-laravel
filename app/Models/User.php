@@ -21,8 +21,18 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'token_balance'
     ];
 
+    public function texts()
+    {
+        return $this->hasMany(Text::class);
+    }
+
+    public function tokenTransactions()
+    {
+        return $this->hasMany(TokenTransaction::class);
+    }
     /**
      * The attributes that should be hidden for serialization.
      *
