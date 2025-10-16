@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Пользователь {{ $user->name }}</title>
+        <title>609-32</title>
     </head>
 <body>
     <p>Пользователь: {{ $user->name }}</p>
@@ -13,8 +13,8 @@
         <thead>
         <tr>
             <th>ID</th>
-            <th>Оригинал</th>
-            <th>Эмодзи текст</th>
+            <th>Оригинальный текст</th>
+            <th>Модифицированный текст</th>
             <th>Токенов затрачено</th>
         </tr>
         </thead>

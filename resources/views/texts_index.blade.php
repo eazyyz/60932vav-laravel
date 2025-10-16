@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>texts</title>
+    <title>609-32</title>
 </head>
 <body>
 <h1>Список текстов</h1>
@@ -11,9 +11,10 @@
     <tr>
         <th>ID</th>
         <th>Автор</th>
-        <th>Оригинал</th>
-        <th>Эмодзи текст</th>
+        <th>Оригинальный текст</th>
+        <th>Модифицированный текст</th>
         <th>Токенов затрачено</th>
+        <th>Действия</th>
     </tr>
     </thead>
     <tbody>
@@ -24,6 +25,10 @@
             <td>{{ $text->original_text}}</td>
             <td>{{ $text->modified_text}}</td>
             <td>{{ $text->used_tokens }}</td>
+            <td>
+                <a href="{{ url('texts/edit/'.$text->id) }}">Редактировать</a> |
+                <a href="{{ url('texts/destroy/'.$text->id) }}">Удалить</a>
+            </td>
         </tr>
     @endforeach
     </tbody>
