@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>609-32</title>
+    <style>
+        svg{height: 12px;}
+    </style>
 </head>
 <body>
 <h1>Список текстов</h1>
@@ -33,6 +36,7 @@
     @endforeach
     </tbody>
 </table>
+{{ $texts->links() }}
 
 </body>
 </html>

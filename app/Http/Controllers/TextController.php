@@ -8,9 +8,12 @@ use Illuminate\Http\Request;
 
 class TextController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return view('texts_index', ['texts' => Text::all()]);
+        $perpage = $request->perpage ?? 2;
+        return view('texts_index', [
+            'texts' => Text::paginate($perpage)->withQueryString(),
+        ]);
     }
 
     public function show($id)
