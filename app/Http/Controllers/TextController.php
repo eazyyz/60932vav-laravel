@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Gate;
 use App\Models\User;
 use App\Models\Text;
 use Illuminate\Http\Request;
@@ -67,6 +68,10 @@ class TextController extends Controller
 
     public function destroy(string $id)
     {
+        $text = Text::find($id);
+        if (!Gate::allows('delete-text', $text)) {
+            return redirect(to: '/error')->with('message', 'У вас нет разрешения на удаление текста ' . $id);
+        }
         text:: destroy($id);
         return redirect(to: '/texts');
     }

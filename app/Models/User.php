@@ -21,7 +21,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'token_balance'
+        'token_balance',
+        'is_admin'
     ];
 
     public function texts()
