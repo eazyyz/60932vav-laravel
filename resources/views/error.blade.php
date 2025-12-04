@@ -1,11 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>609-32</title>
-</head>
-<body>
-<h2>{{$message}}</h2>
-<a href="{{url('texts')}}">назад</a>
-</body>
-</html>
+@if (session('message'))
+    <div class="container-fluid py-1">
+        <div class="alert alert-warning alert-dismissible fade show mt-5" role="alert">
+            {{ session('message') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    </div>
+@endif
+
+@if ($errors->any())
+    <div class="container-fluid py-1">
+        @error ('email')
+        <div class="alert alert-warning alert-dismissible fade show mt-5" role="alert">
+            {{$message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+        @enderror
+        @error ('password' )
+        <div class="alert alert-warning alert-dismissible fade show mt-5" role="alert">
+            {{ $message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+        @enderror
+        @error ('error')
+        <div class="alert alert-warning alert-dismissible fade show mt-5" role="alert">
+            {{ $message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+        @enderror
+        @error ('success')
+        <div class="alert alert-warning alert-dismissible fade show mt-5" role="alert">
+            {{ $message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+        @enderror
+    </div>
+@endif

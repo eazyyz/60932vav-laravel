@@ -4,15 +4,18 @@ use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TextController;
-use Symfony\Component\HttpKernel\Controller\ErrorController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home', [
+        'balance' => auth()->check() ? auth()->user()->tokens_balance : 0
+    ]);
+
 });
 Route::get('/hello', function () {
     return view('hello', ['title' => 'Hello World']);
 });
-
 Route::get('/users', [UserController::class, 'index'])->name('users_index')->middleware('auth');
 Route::get('/users/{id}', [UserController::class, 'show'])->name('users_show')->middleware('auth');
 Route::get('/texts', [TextController::class, 'index'])->name('texts_index')->middleware('auth');

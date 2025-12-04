@@ -1,26 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>609-32</title>
-    <style>
-        svg{height: 12px;}
-    </style>
-</head>
-<body>
-<h1>Список текстов</h1>
-<table>
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Автор</th>
-        <th>Оригинальный текст</th>
-        <th>Модифицированный текст</th>
-        <th>Токенов затрачено</th>
-        <th>Действия</th>
-    </tr>
-    </thead>
-    <tbody>
+@extends('layout')
+@section('content')
+    <div class="container-fluid py-3">
+        <h1 class="fw-bold">Список текстов</h1>
+        <div class="table">
+            <table class="table table-hover border">
+                <thead class="table-light">
+                <tr>
+                    <th class="fw-semibold">ID</th>
+                    <th class="fw-semibold">Автор</th>
+                    <th class="fw-semibold">Оригинальный текст</th>
+                    <th class="fw-semibold">Модифицированный текст</th>
+                    <th class="fw-semibold">Токенов затрачено</th>
+                    <th class="fw-semibold">Действия</th>
+                </tr>
+                </thead>
+                <tbody>
     @foreach($texts as $text)
         <tr>
             <td>{{ $text->id }}</td>
@@ -36,7 +30,7 @@
     @endforeach
     </tbody>
 </table>
+        </div>
+    </div>
 {{ $texts->links() }}
-
-</body>
-</html>
+@endsection

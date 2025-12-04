@@ -1,29 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>609-32</title>
-</head>
-<body>
-<table>
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Имя</th>
-        <th>Email</th>
-        <th>Токены</th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach($users as $user)
-        <tr>
-            <td>{{ $user->id }}</td>
-            <td>{{ $user->name }}</td>
-            <td>{{ $user->email }}</td>
-            <td>{{ $user->tokens_balance }}</td>
-        </tr>
-    @endforeach
-    </tbody>
-</table>
-</body>
-</html>
+@extends('layout')
+@section('content')
+    <div class="container-fluid py-3">
+        <h1 class="fw-bold">Пользователи</h1>
+        <div class="table">
+            <table class="table table-hover border">
+                <thead class="table-light">
+                <tr>
+                    <th class="fw-semibold">ID</th>
+                    <th class="fw-semibold">Имя</th>
+                    <th class="fw-semibold">Email</th>
+                    <th class="fw-semibold">Токены</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($users as $user)
+                    <tr>
+                        <td>{{ $user->id }}</td>
+                        <td>{{ $user->name }}</td>
+                        <td>{{ $user->email }}</td>
+                        <td>{{ $user->tokens_balance }}</td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+@endsection

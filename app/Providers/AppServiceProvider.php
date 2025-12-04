@@ -28,10 +28,17 @@ class AppServiceProvider extends ServiceProvider
         Gate::define('view-users', function ($user) {
             return $user->is_admin == 1;
         });
-        
+        Gate::define('view-user', function ($user, $targetUser) {
+            return $user->is_admin == 1 || $user->id == $targetUser;
+        });
+
+
         Gate::define('delete-text', function ($user, $text) {
             return $user->is_admin == 1 || $text->user_id == $user->id;
         });
 
+        Gate::define('view-create-text', function ($user) {
+            return $user->is_admin == 1;
+        });
     }
 }
