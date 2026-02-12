@@ -1,0 +1,15 @@
+<?php
+
+use App\Http\Controllers\TextControllerAPI;
+use App\Http\Controllers\UserControllerAPI;
+use App\Http\Controllers\TokenControllerAPI;
+use Illuminate\Support\Facades\Route;
+
+Route:: get('/texts', [TextControllerAPI::class, 'index']);
+Route::get('/texts/{id}', [TextControllerAPI::class, 'show']);
+
+Route:: get('/users', [UserControllerAPI::class, 'index']);
+Route::get('/users/{id}', [UserControllerAPI::class, 'show']);
+
+Route:: get('/tokens', [TokenControllerAPI::class, 'index']);
+Route::get('/tokens/{id}', [TokenControllerAPI::class, 'show']);
