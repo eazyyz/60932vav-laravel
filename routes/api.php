@@ -1,11 +1,14 @@
 <?php
 
+use App\Http\Controllers\EmojifyController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TextControllerAPI;
 use App\Http\Controllers\UserControllerAPI;
 use App\Http\Controllers\TokenControllerAPI;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
+Route::post('/emojify', [EmojifyController::class, 'emojify']);
 
 Route::post('/login', [AuthController::class, 'login']);
 

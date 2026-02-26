@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Http;
 use App\Models\User;
 use App\Models\Text;
 use Illuminate\Http\Request;
+use App\Services\EmojifyService;
 
 class TextController extends Controller
 {
@@ -66,15 +66,13 @@ class TextController extends Controller
             }
 
 //            $modifiedText = !empty($words) ? implode(' 👋 ', $words) . ' 👋' : '';
-            $response = Http::post('http://127.0.0.1:8001/EmojifyText', [
-                'text' => $originalText
-            ]);
+            try {
+                $modifiedText = app(EmojifyService::class)
+                    ->emojify($originalText);
+            } catch (\Exception $e) {
+                return redirect()->back()->withErrors(['Ошибка обработки текста ИИ']);
+            }
 
-            if (!$response->successful() || empty($response->json('modified_text')))
-                return redirect()->back()->withErrors(['Ошибка обработки текста']);
-
-
-            $modifiedText = $response->json('modified_text');
             $wordsM = preg_split('/\s+/', trim($modifiedText));
             if (count($wordsM) > count($words))
                 return redirect()->back()->withErrors(['Ошибка обработки текста']);
