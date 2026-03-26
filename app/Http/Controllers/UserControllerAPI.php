@@ -7,11 +7,25 @@ use Illuminate\Http\Request;
 
 class UserControllerAPI extends Controller
 {
-    public function index()
+//    public function index()
+//    {
+//        return response(User::all());
+//    }
+    public function index(Request $request)
     {
-        return response(User::all());
+        $perpage = $request->perpage ?? 5;
+        $page = $request->page ?? 0;
+        $offset = $perpage * $page;
+
+        return response(User::limit($perpage)
+            ->offset($offset)
+            ->get());
     }
 
+    public function total()
+    {
+        return response(User::all()->count());
+    }
     public function show($id)
     {
         return response(User::find($id));

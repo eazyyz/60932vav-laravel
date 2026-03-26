@@ -12,19 +12,19 @@ Route::post('/emojify', [EmojifyController::class, 'emojify']);
 
 Route::post('/login', [AuthController::class, 'login']);
 
-//Route:: get('/texts', [TextControllerAPI::class, 'index']);
-//Route::get('/texts/{id}', [TextControllerAPI::class, 'show']);
+Route:: get('/texts', [TextControllerAPI::class, 'index']);
+Route::get('/texts/{id}', [TextControllerAPI::class, 'show']);
+Route::get('/texts_total', [TextControllerAPI::class, 'total']);
 
 Route:: get('/users', [UserControllerAPI::class, 'index']);
 Route::get('/users/{id}', [UserControllerAPI::class, 'show']);
+Route::get('/users_total', [UserControllerAPI::class, 'total']);
 
 Route:: get('/tokens', [TokenControllerAPI::class, 'index']);
 Route::get('/tokens/{id}', [TokenControllerAPI::class, 'show']);
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
-    Route::middleware('auth:sanctum')->get('/texts', [TextControllerAPI::class, 'index']);
-    Route::middleware('auth:sanctum')->get('/texts/{id}', [TextControllerAPI::class, 'show']);
-    Route::middleware('auth:sanctum')->get('/users', function (Request $request) {
+    Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
         return $request->user();
     });
     Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout']);

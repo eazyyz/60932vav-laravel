@@ -7,11 +7,26 @@ use Illuminate\Http\Request;
 
 class TextControllerAPI extends Controller
 {
+//    public function index(Request $request)
+//    {
+//        return response(Text::all());
+//    }
+
     public function index(Request $request)
     {
-        return response(Text::all());
+        $perpage = $request->perpage ?? 5;
+        $page = $request->page ?? 0;
+        $offset = $perpage * $page;
+
+        return response(Text::limit($perpage)
+            ->offset($offset)
+            ->get());
     }
 
+    public function total()
+    {
+        return response(Text::all()->count());
+    }
     public function show($id)
     {
         return response(Text::find($id));
