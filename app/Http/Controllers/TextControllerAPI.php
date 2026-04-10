@@ -54,4 +54,22 @@ class TextControllerAPI extends Controller
     {
         //
     }
+
+    public function userTexts(Request $request)
+    {
+        $user = $request->user();
+        $perpage = $request->perpage ?? 10;
+        $page = $request->page ?? 0;
+        $offset = $perpage * $page;
+
+        $texts = Text::where('user_id', $user->id)
+            ->limit($perpage)
+            ->offset($offset)
+            ->get();
+
+        return response()->json([
+            'texts' => $texts,
+            'total' => Text::where('user_id', $user->id)->count()
+        ]);
+    }
 }

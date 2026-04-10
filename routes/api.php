@@ -8,17 +8,19 @@ use App\Http\Controllers\TokenControllerAPI;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::post('/emojify', [EmojifyController::class, 'emojify']);
+Route::middleware('auth:sanctum')->post('/emojify', [EmojifyController::class, 'emojify']);
 
 Route::post('/login', [AuthController::class, 'login']);
 
 Route:: get('/texts', [TextControllerAPI::class, 'index']);
 Route::get('/texts/{id}', [TextControllerAPI::class, 'show']);
 Route::get('/texts_total', [TextControllerAPI::class, 'total']);
+Route::middleware('auth:sanctum')->get('/user/texts', [TextControllerAPI::class, 'userTexts']);
 
 Route:: get('/users', [UserControllerAPI::class, 'index']);
 Route::get('/users/{id}', [UserControllerAPI::class, 'show']);
 Route::get('/users_total', [UserControllerAPI::class, 'total']);
+Route::post('/users/{id}/avatar', [UserControllerAPI::class, 'uploadAvatar']);
 
 Route:: get('/tokens', [TokenControllerAPI::class, 'index']);
 Route::get('/tokens/{id}', [TokenControllerAPI::class, 'show']);

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class UserControllerAPI extends Controller
 {
@@ -54,4 +56,36 @@ class UserControllerAPI extends Controller
     {
         //
     }
+
+    public function uploadAvatar(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+        $file = $request->file('avatar');
+        $fileName = rand(1, 1000000) . '_' . $file->getClientOriginalName();
+
+        try {
+            $path = Storage::disk('s3')->putFileAs(
+                'avatars',
+                $file,
+                $fileName
+            );
+            $fileUrl = Storage::disk('s3')->url($path);
+
+        } catch (Exception $e) {
+            return response()->json([
+                'code' => 2,
+                'message' => 'Ошибка загрузки файла в S3'
+            ], 500);
+        }
+
+        $user->avatar = $fileUrl;
+        $user->save();
+
+        return response()->json([
+            'code' => 0,
+            'message' => 'Аватар успешно загружен',
+            'avatar' => $fileUrl
+        ]);
+    }
+
 }
